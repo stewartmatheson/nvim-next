@@ -1,3 +1,5 @@
+-- TODO : Figure out how to lazy load this
+
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.2",
@@ -50,6 +52,7 @@ return {
           o = { builtin.vim_options, 'Find Options' },
           a = { builtin.autocommands, 'Find Autocommands' },
           g = { builtin.git_status, 'Find Chagnes' },
+          w = { builtin.live_grep, 'Live Grep' },
         }
       }
     })
