@@ -84,14 +84,18 @@ local lsp_config = {
 
     local lsp = require('lsp-zero')
 
-    lsp.on_attach(function(_, bufnr)
+    local on_attach = function(_, bufnr)
       -- see :help lsp-zero-keybindings
       -- to learn the available actions
       lsp.default_keymaps({ buffer = bufnr, preserve_mappings = false })
-    end)
+    end
+
+    lsp.on_attach(on_attach)
 
     -- (Optional) Configure lua language server for neovim
-    require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+    local lsp_config = require('lspconfig')
+    lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
+    lsp_config.lemminx.setup({ cmd = { "lemminx.exe" } })
 
     lsp.setup_servers({ 'clangd', 'lua_ls' })
 

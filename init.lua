@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd(
   { "BufEnter" },
   {
     group = filetypes,
-    pattern = { "*.lua", "*.cpp", "*.hpp", "*.c", "*.h" },
+    pattern = { "*.lua", "*.xml", "*.cpp", "*.hpp", "*.c", "*.h" },
     callback = function()
       vim.o.expandtab = true
       vim.o.tabstop = 2
