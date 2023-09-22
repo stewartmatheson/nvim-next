@@ -1,11 +1,11 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
+if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
@@ -40,8 +40,11 @@ local set_winbar = function()
   local icon, color = require 'nvim-web-devicons'.get_icon_color("%f", vim.bo.filetype)
   vim.api.nvim_set_hl(0, 'WinBarFileTypeIcon', { bg = 'NONE', fg = color })
   local file_path = vim.api.nvim_eval_statusline("%F", {}).str
-  local raw_line = '%#WinBarFileTypeIcon#' .. icon .. "%#ToobarLine# " .. file_path
-  vim.opt_local.winbar = raw_line
+  if icon == nil then
+    vim.opt_local.winbar = "%#ToobarLine# " .. file_path
+  else
+    vim.opt_local.winbar = '%#WinBarFileTypeIcon#' .. icon .. "%#ToobarLine# " .. file_path
+  end
 end
 
 vim.api.nvim_create_autocmd(
